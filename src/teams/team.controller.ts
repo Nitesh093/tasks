@@ -1,5 +1,5 @@
-// src/teams/team.controller.ts
-import { Controller, Get, Post, Body, Param, NotFoundException, HttpStatus } from '@nestjs/common';
+// team.controller.ts
+import { Controller, Get, Post, Body, Param, NotFoundException, HttpStatus, Delete } from '@nestjs/common';
 import { Team } from './team.entity';
 import { TeamService } from './team.service';
 
@@ -26,5 +26,10 @@ export class TeamController {
       throw new NotFoundException(`Team with ID ${id} not found`);
     }
     return team;
+  }
+
+  @Delete(':id')
+  async delete(@Param('id') id: string): Promise<void> {
+    await this.teamService.delete(id);
   }
 }

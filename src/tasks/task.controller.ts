@@ -1,5 +1,5 @@
-// src/tasks/task.controller.ts
-import { Controller, Get, Post, Body, Param, Put, Res, HttpStatus } from '@nestjs/common';
+// task.controller.ts
+import { Controller, Get, Post, Body, Param, Put, Delete, Res, HttpStatus } from '@nestjs/common';
 import { Response } from 'express';
 import { Task } from './task.entity';
 import { TaskService } from './task.service';
@@ -40,6 +40,14 @@ export class TaskController {
     const updatedTaskResult = await this.taskService.update(id, updatedTask);
     res.status(HttpStatus.OK).json({
       message: 'Task updated successfully'
+    });
+  }
+
+  @Delete(':id')
+  async delete(@Param('id') id: string, @Res() res: Response): Promise<void> {
+    await this.taskService.delete(id);
+    res.status(HttpStatus.OK).json({
+      message: 'Task deleted successfully'
     });
   }
 }

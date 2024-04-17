@@ -13,7 +13,7 @@ export class Task {
   due_date: Date;
 
   @Column()
-  assignee: string;
+  assignee: string[];
 
   @Column()
   status: string;
